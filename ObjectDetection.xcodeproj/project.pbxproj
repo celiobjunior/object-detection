@@ -10,9 +10,22 @@
 		4A5B3AAF2E70851D001A47B6 /* ObjectDetection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectDetection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4A5B3B332E708B99001A47B6 /* Exceptions for "ObjectDetection" folder in "ObjectDetection" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = 4A5B3AAE2E70851D001A47B6 /* ObjectDetection */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4A5B3AB12E70851D001A47B6 /* ObjectDetection */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4A5B3B332E708B99001A47B6 /* Exceptions for "ObjectDetection" folder in "ObjectDetection" target */,
+			);
 			path = ObjectDetection;
 			sourceTree = "<group>";
 		};
@@ -256,6 +269,7 @@
 				DEVELOPMENT_TEAM = 2W64P5AA7K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to perform real-time object detection and classification";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,6 +298,7 @@
 				DEVELOPMENT_TEAM = 2W64P5AA7K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to perform real-time object detection and classification";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
