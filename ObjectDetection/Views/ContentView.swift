@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var model = ContentViewModel()
-    @StateObject private var frameManager = FrameManager.shared
     @StateObject var cameraManager = CameraManager()
+    @StateObject var objectDetector = ObjectDetector()
     
     var body: some View {
         ZStack {
-            FrameView(image: model.frame)
+            CameraView()
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Spacer()
                 
-                Text(frameManager.classificationResult)
+                Text(objectDetector.currentResult?.label ?? "No object detected")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.green)
                     .multilineTextAlignment(.center)
@@ -31,19 +30,19 @@ struct ContentView: View {
                             .fill(Color.black.opacity(0.85))
                     )
                     .padding(.bottom, 40)
+                
+                if let confidence = objectDetector.currentResult?.confidence {
+                    Text("Confidence: \(String(format: "%.1f%%", confidence * 100))")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.white.opacity(0.8))
+                        .padding(.bottom, 20)
+                }
             }
             
             ErrorView(error: cameraManager.error)
         }
-        .task {
-            // Configura o FrameManager com o CameraManager
-            frameManager.configure(with: cameraManager)
-            
-            // Inicializa a câmera
-            await cameraManager.setupCamera()
-            await cameraManager.startCapture()
-        }
         .environmentObject(cameraManager)
+        .environmentObject(objectDetector)
     }
 }
 
