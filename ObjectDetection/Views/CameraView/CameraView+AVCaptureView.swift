@@ -107,9 +107,12 @@ extension CameraView.AVCaptureView {
 
                 for await device in notifications {
                     guard !Task.isCancelled else { return }
-                    guard capturePreview?.connection?.isVideoOrientationSupported == true else { continue }
-
-                    capturePreview?.connection?.videoOrientation = .init(rawValue: device.orientation.rawValue)!
+                    guard let connection = capturePreview?.connection else { continue }
+                    
+                    guard let rotationAngle = CameraManager.RotationAngle(from: device.orientation) else { continue }
+                    
+                    guard connection.isVideoRotationAngleSupported(rotationAngle.rawValue) else { continue }
+                    connection.videoRotationAngle = rotationAngle.rawValue
 
                     try? await Task.sleep(for: .seconds(0.5))
 

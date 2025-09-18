@@ -35,6 +35,28 @@ import SwiftUI
     enum RunStatus: CaseIterable {
         case stopped, loading, running
     }
+    
+    enum RotationAngle: CGFloat, CaseIterable {
+        case portrait = 0
+        case landscapeLeft = 90
+        case portraitUpsideDown = 180
+        case landscapeRight = 270
+        
+        init?(from orientation: UIDeviceOrientation) {
+            switch orientation {
+            case .portrait:
+                self = .portrait
+            case .landscapeLeft:
+                self = .landscapeLeft
+            case .portraitUpsideDown:
+                self = .portraitUpsideDown
+            case .landscapeRight:
+                self = .landscapeRight
+            default:
+                return nil
+            }
+        }
+    }
 }
 
 // MARK: - Publics
@@ -152,11 +174,7 @@ private extension CameraManager {
         captureSession.addOutput(captureOutput)
         
         if let connection = captureOutput.connection(with: .video) {
-            if #available(iOS 17.0, *) {
-                connection.videoRotationAngle = .zero //portrait
-            } else {
-                connection.videoOrientation = .portrait
-            }
+            connection.videoRotationAngle = RotationAngle.portrait.rawValue
             connection.isVideoMirrored = (currentCamera == .front)
         }
         
@@ -187,21 +205,22 @@ private extension CameraManager {
         (frontCamera, backCamera) = await (frontCameraInput, backCameraInput)
 
         switch (frontCamera, backCamera) {
-        case (.some, .some(let backCamera)):
-            currentCamera = .back
-            captureSession.addInput(backCamera)
-            return true
+            case (.some, .some(let backCamera)):
+                currentCamera = .back
+                captureSession.addInput(backCamera)
+                return true
 
-        case (.some(let frontCamera), .none):
-            captureSession.addInput(frontCamera)
-            return true
+            case (.some(let frontCamera), .none):
+                captureSession.addInput(frontCamera)
+                return true
 
-        case (.none, .some(let backCamera)):
-            captureSession.addInput(backCamera)
-            return true
+            case (.none, .some(let backCamera)):
+                captureSession.addInput(backCamera)
+                return true
 
-        case (.none, .none):
-            return false
-        }
+            case (.none, .none):
+                return false
+            }
     }
 }
+
