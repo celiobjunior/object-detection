@@ -14,14 +14,14 @@ struct ErrorView: View {
     var body: some View {
         VStack {
             Text(error?.localizedDescription ?? "")
-                .bold()
+                .font(.system(size: .fontSize.small, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
-                .padding(8)
+                .padding(.spacing.x4)
                 .foregroundColor(.white)
                 .background(Color.red.edgesIgnoringSafeArea(.top))
-                .opacity(error == nil ? 0.0 : 1.0)
-                .animation(.easeInOut, value: 0.25)
+                .opacity(error == nil ? .opacity.transparent : .opacity.opaque)
+                .animation(.easeInOut(duration: .animation.fast), value: error != nil)
             
             Spacer()
         }

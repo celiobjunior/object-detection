@@ -17,6 +17,7 @@ import CoreML
 
     @Published private(set) var setupStatus: SetupStatus = .notStarted
     @Published private(set) var currentResult: ObjectResult? = nil
+    @Published private(set) var detectionHistory: [ObjectResult] = []
 
     private(set) var model: Resnet50? = nil
     
@@ -52,6 +53,11 @@ extension ObjectDetector {
             await MainActor.run {
                 if let result = try? getObjectResult(buffer: imageBuffer) {
                     currentResult = result
+                    detectionHistory.append(result)
+                    
+                    if detectionHistory.count > 100 {
+                        detectionHistory.removeFirst()
+                    }
                 }
             }
         }

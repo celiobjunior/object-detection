@@ -12,40 +12,28 @@ struct ContentView: View {
     @StateObject var objectDetector = ObjectDetector()
     
     var body: some View {
-        ZStack {
-            CameraView()
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Spacer()
-                
-                Text(objectDetector.currentResult?.label ?? "No object detected")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.green)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.black.opacity(0.85))
-                    )
-                    .padding(.bottom, 40)
-                
-                if let confidence = objectDetector.currentResult?.confidence {
-                    Text("Confidence: \(String(format: "%.1f%%", confidence * 100))")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.white.opacity(0.8))
-                        .padding(.bottom, 20)
+        TabView {
+            HistoryView()
+                .tabItem {
+                    Image(systemName: "clock.fill")
+                    Text("History")
                 }
-            }
             
-            ErrorView(error: cameraManager.error)
+            CameraView()
+                .tabItem {
+                    Image(systemName: "camera.fill")
+                    Text("Camera")
+                }
+                .onDisappear { Task { await cameraManager.stopCapture() } }
+                .onAppear { Task { await cameraManager.startCapture() } }
         }
         .environmentObject(cameraManager)
         .environmentObject(objectDetector)
     }
 }
 
+
 #Preview {
     ContentView()
 }
+

@@ -9,7 +9,9 @@ import Foundation
 
 // MARK: - ObjectResult
 
-struct ObjectResult {
+struct ObjectResult: Identifiable {
+    let id = UUID()
+    let timestamp = Date()
 
     // MARK: Properties
 

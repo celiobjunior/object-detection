@@ -19,13 +19,32 @@ struct CameraView: View {
     // MARK: View
     
     var body: some View {
-        AVCaptureView()
-            .background(.ultraThinMaterial)
-            .overlay(statusBadgeView)
-            .overlay(alignment: .bottomTrailing) {
-                switchCameraBadgeView
+        NavigationStack {
+            ZStack {
+                AVCaptureView()
+                    .background(.ultraThinMaterial)
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay {
+                        statusBadgeView
+                    }
+                    .overlay {
+                        detectionOverlay
+                    }
+                    .overlay {
+                        ErrorView(error: cameraManager.error)
+                    }
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        cameraControlButtons
+                            .padding(.trailing)
+                    }
+                    Spacer()
+                }
             }
             .task(onAppear)
+        }
     }
 }
 
