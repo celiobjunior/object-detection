@@ -30,9 +30,6 @@ struct CameraView: View {
                     .overlay {
                         detectionOverlay
                     }
-                    .overlay {
-                        ErrorView(error: cameraManager.error)
-                    }
                 
                 VStack {
                     HStack {
