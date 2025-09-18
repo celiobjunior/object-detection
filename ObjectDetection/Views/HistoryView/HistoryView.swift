@@ -21,11 +21,11 @@ struct HistoryView: View {
                         .foregroundColor(.textSecondary)
                         .padding(.spacing.x6)
                     
-                    Text("No Detection History")
+                    Text(LocalizedStrings.History.emptyTitle)
                         .font(.system(size: .fontSize.large, weight: .medium))
                         .foregroundColor(.textPrimary)
                     
-                    Text("Start detecting objects to see your history here")
+                    Text(LocalizedStrings.History.emptyDescription)
                         .font(.system(size: .fontSize.small))
                         .foregroundColor(.textSecondary)
                         .multilineTextAlignment(.center)
@@ -40,7 +40,7 @@ struct HistoryView: View {
                                     .font(.system(size: .fontSize.medium, weight: .semibold))
                                     .foregroundColor(.textPrimary)
                                 
-                                Text("Confidence: \(String(format: "%.1f%%", result.confidence * 100))")
+                                Text(LocalizedStrings.Detection.confidence(Float(result.confidence)))
                                     .font(.system(size: .fontSize.xsmall))
                                     .foregroundColor(.textSecondary)
                             }
@@ -55,7 +55,7 @@ struct HistoryView: View {
                     }
                 }
             }
-            .navigationTitle("Detection History")
+            .navigationTitle(LocalizedStrings.History.title)
             .navigationBarTitleDisplayMode(.large)
         }
     }

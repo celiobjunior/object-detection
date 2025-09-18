@@ -1,0 +1,64 @@
+/* 
+   Localizable.strings (Portuguese - Brazil)
+   ObjectDetection
+   
+   Created by Celio Junior on 18/09/25.
+*/
+
+// MARK: - Camera Errors
+"camera.error.unavailable" = "Câmera Indisponível";
+"camera.error.authorization.denied" = "Acesso à Câmera Negado";
+"camera.error.authorization.restricted" = "Acesso à Câmera Restrito";
+"camera.error.authorization.unknown" = "Autorização da Câmera Desconhecida";
+"camera.error.cannot.add.input" = "Não Foi Possível Adicionar Entrada da Câmera";
+"camera.error.cannot.add.output" = "Não Foi Possível Adicionar Saída da Câmera";
+
+// MARK: - Camera Status
+"camera.status.access.denied" = "Acesso à Câmera Negado";
+"camera.status.failed" = "Falha na Câmera";
+"camera.status.loading" = "Carregando Câmera";
+
+// MARK: - Detection
+"detection.no.object" = "Nenhum objeto detectado";
+"detection.confidence" = "Confiança: %.1f%%";
+
+// MARK: - History
+"history.title" = "Histórico de Detecções";
+"history.empty.title" = "Nenhum Histórico de Detecção";
+"history.empty.description" = "Comece a detectar objetos para ver seu histórico aqui";
+
+// MARK: - Helper
+"helper.title" = "Ajuda e Informações";
+"helper.how.to.use" = "Como Usar";
+"helper.camera.features" = "Recursos da Câmera";
+"helper.about" = "Sobre";
+
+// MARK: - Helper Rows
+"helper.camera.tab.title" = "Aba Câmera";
+"helper.camera.tab.description" = "Aponte sua câmera para objetos para detectá-los e classificá-los em tempo real";
+"helper.history.tab.title" = "Aba Histórico";
+"helper.history.tab.description" = "Veja todas as suas detecções anteriores com horários";
+"helper.helper.tab.title" = "Aba Ajuda";
+"helper.helper.tab.description" = "Obtenha ajuda e informações sobre o aplicativo";
+
+"helper.switch.cameras.title" = "Alternar Câmeras";
+"helper.switch.cameras.description" = "Toque para alternar entre as câmeras frontal e traseira";
+"helper.realtime.detection.title" = "Detecção em Tempo Real";
+"helper.realtime.detection.description" = "Objetos são detectados automaticamente conforme você aponta a câmera";
+"helper.confidence.score.title" = "Pontuação de Confiança";
+"helper.confidence.score.description" = "Veja o quão confiante a IA está sobre cada detecção";
+
+"helper.ai.model.title" = "Modelo de IA";
+"helper.ai.model.description" = "Usa o modelo CoreML ResNet50 para classificação de objetos";
+"helper.ios.requirement.title" = "iOS 18.5+";
+"helper.ios.requirement.description" = "Requer iOS 18.5 ou posterior para funcionar";
+"helper.privacy.title" = "Privacidade";
+"helper.privacy.description" = "Todo o processamento acontece no seu dispositivo - nenhum dado é enviado para servidores";
+
+// MARK: - Navigation
+"navigation.camera" = "Câmera";
+"navigation.history" = "Histórico";
+"navigation.helper" = "Ajuda";
+
+// MARK: - Permissions
+"permissions.camera.usage" = "Este aplicativo precisa da câmera para detectar e classificar objetos em tempo real";

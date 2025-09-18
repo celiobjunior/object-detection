@@ -1,0 +1,64 @@
+/* 
+   Localizable.strings (English)
+   ObjectDetection
+   
+   Created by Celio Junior on 18/09/25.
+*/
+
+// MARK: - Camera Errors
+"camera.error.unavailable" = "Camera Unavailable";
+"camera.error.authorization.denied" = "Camera Access Denied";
+"camera.error.authorization.restricted" = "Camera Access Restricted";
+"camera.error.authorization.unknown" = "Camera Authorization Unknown";
+"camera.error.cannot.add.input" = "Cannot Add Camera Input";
+"camera.error.cannot.add.output" = "Cannot Add Camera Output";
+
+// MARK: - Camera Status
+"camera.status.access.denied" = "Camera Access Denied";
+"camera.status.failed" = "Camera Failed";
+"camera.status.loading" = "Loading Camera";
+
+// MARK: - Detection
+"detection.no.object" = "No object detected";
+"detection.confidence" = "Confidence: %.1f%%";
+
+// MARK: - History
+"history.title" = "Detection History";
+"history.empty.title" = "No Detection History";
+"history.empty.description" = "Start detecting objects to see your history here";
+
+// MARK: - Helper
+"helper.title" = "Help & Info";
+"helper.how.to.use" = "How to Use";
+"helper.camera.features" = "Camera Features";
+"helper.about" = "About";
+
+// MARK: - Helper Rows
+"helper.camera.tab.title" = "Camera Tab";
+"helper.camera.tab.description" = "Point your camera at objects to detect and classify them in real-time";
+"helper.history.tab.title" = "History Tab";
+"helper.history.tab.description" = "View all your previous object detections with timestamps";
+"helper.helper.tab.title" = "Helper Tab";
+"helper.helper.tab.description" = "Get help and information about the app";
+
+"helper.switch.cameras.title" = "Switch Cameras";
+"helper.switch.cameras.description" = "Tap to switch between front and back cameras";
+"helper.realtime.detection.title" = "Real-time Detection";
+"helper.realtime.detection.description" = "Objects are detected automatically as you point the camera";
+"helper.confidence.score.title" = "Confidence Score";
+"helper.confidence.score.description" = "See how confident the AI is about each detection";
+
+"helper.ai.model.title" = "AI Model";
+"helper.ai.model.description" = "Uses ResNet50 CoreML model for object classification";
+"helper.ios.requirement.title" = "iOS 18.5+";
+"helper.ios.requirement.description" = "Requires iOS 18.5 or later to run";
+"helper.privacy.title" = "Privacy";
+"helper.privacy.description" = "All processing happens on your device - no data is sent to servers";
+
+// MARK: - Navigation
+"navigation.camera" = "Camera";
+"navigation.history" = "History";
+"navigation.helper" = "Helper";
+
+// MARK: - Permissions
+"permissions.camera.usage" = "This app needs the camera to detect and classify objects in real-time";

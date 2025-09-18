@@ -16,13 +16,13 @@ struct ContentView: View {
             HistoryView()
                 .tabItem {
                     Image(systemName: "clock.fill")
-                    Text("History")
+                    Text(LocalizedStrings.Navigation.history)
                 }
             
             CameraView()
                 .tabItem {
                     Image(systemName: "camera.fill")
-                    Text("Camera")
+                    Text(LocalizedStrings.Navigation.camera)
                 }
                 .onDisappear { Task { await cameraManager.stopCapture() } }
                 .onAppear { Task { await cameraManager.startCapture() } }

@@ -22,19 +22,19 @@ extension CameraError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .cameraUnavailable:
-            return "Camera unavailable"
+            return "camera.error.unavailable".localized
         case .cannotAddInput:
-            return "Cannot add capture input to session"
+            return "camera.error.cannot.add.input".localized
         case .cannotAddOutput:
-            return "Cannot add video output to session"
+            return "camera.error.cannot.add.output".localized
         case .createCaptureInput(let error):
             return "Creating capture input for camera: \(error.localizedDescription)"
         case .deniedAuthorization:
-            return "Camera access denied"
+            return "camera.error.authorization.denied".localized
         case .restrictedAuthorization:
-            return "Attempting to access a restricted capture device"
+            return "camera.error.authorization.restricted".localized
         case .unknownAuthorization:
-            return "Unknown authorization status for capture device"
+            return "camera.error.authorization.unknown".localized
         }
     }
 }

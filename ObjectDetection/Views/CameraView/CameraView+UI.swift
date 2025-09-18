@@ -15,13 +15,13 @@ extension CameraView {
         HStack(spacing: .spacing.x8) {
             switch status {
             case .accessDenied:
-                Label("Camera Access Denied", systemImage: "exclamationmark.triangle")
+                Label(LocalizedStrings.Camera.accessDenied, systemImage: "exclamationmark.triangle")
 
             case .failed:
-                Label("Camera Failed", systemImage: "exclamationmark.triangle")
+                Label(LocalizedStrings.Camera.failed, systemImage: "exclamationmark.triangle")
 
             case .loading:
-                Label("Loading Camera", systemImage: "camera")
+                Label(LocalizedStrings.Camera.loading, systemImage: "camera")
 
             case .stopped, .running, .notStarted:
                 EmptyView()
@@ -77,7 +77,7 @@ extension CameraView {
     }
     
     var objectResultLabel: some View {
-        Text(objectDetector.currentResult?.label ?? "No object detected")
+        Text(objectDetector.currentResult?.label ?? LocalizedStrings.Detection.noObject)
             .font(.system(size: .fontSize.medium, weight: .semibold))
             .foregroundColor(.feedbackSuccess)
             .multilineTextAlignment(.center)
@@ -93,7 +93,7 @@ extension CameraView {
     var confidenceLabel: some View {
         Group {
             if let confidence = objectDetector.currentResult?.confidence {
-                Text("Confidence: \(String(format: "%.1f%%", confidence * 100))")
+                Text(LocalizedStrings.Detection.confidence(Float(confidence)))
                     .font(.system(size: .fontSize.xsmall, weight: .medium))
                     .foregroundColor(.textLight)
                     .padding(.bottom, .spacing.x10)

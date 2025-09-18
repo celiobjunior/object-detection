@@ -2,7 +2,7 @@
 //  GlobalOpacity.swift
 //  ObjectDetection
 //
-//  Created by Claude Code on 18/09/25.
+//  Created by Celio Junior on 18/09/25.
 //
 
 import Foundation
