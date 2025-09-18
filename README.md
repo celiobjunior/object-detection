@@ -2,7 +2,9 @@
 
 A real-time object detection iOS app that uses your device's camera to identify and classify objects using machine learning.
 
-![App Screenshot](Assets/screenshot.png)
+<img src="Assets/img1.png" width="45%" alt="Camera Detection Screen">
+<img src="Assets/img2.png" width="45%" alt="History View Screen">  
+<img src="Assets/img3.png" width="45%" alt="Helper Info Screen">
 
 ## How it works
 

@@ -44,7 +44,7 @@ struct HelperView: View {
                     VStack(alignment: .leading, spacing: .spacing.x6) {
                         Label(LocalizedStrings.Helper.about, systemImage: "app.badge.fill")
                             .font(.system(size: .fontSize.medium, weight: .semibold))
-                            .foregroundColor(.textPrimary)
+                            .foregroundColor(.feedbackSuccess)
                         
                         VStack(alignment: .leading, spacing: .spacing.x4) {
                             HelpRow(icon: "brain.head.profile", title: "helper.ai.model.title".localized, description: "helper.ai.model.description".localized)
