@@ -12,8 +12,8 @@ import SwiftUI
 public extension Color {
     
     // MARK: - Icon Colors
-    /// Primary icon color (black)
-    static var iconPrimary: Color { .black }
+    /// Primary icon color (adaptive for dark/light mode)
+    static var iconPrimary: Color { Color.primary }
     
     // MARK: - Feedback Colors
     /// Success color for positive feedback
@@ -22,10 +22,10 @@ public extension Color {
     static var feedbackError: Color { .red }
     
     // MARK: - Text Colors
-    /// Primary text color
-    static var textPrimary: Color { .black }
-    /// Secondary text color
-    static var textSecondary: Color { .gray }
+    /// Primary text color (adaptive for dark/light mode)
+    static var textPrimary: Color { Color.primary }
+    /// Secondary text color (adaptive for dark/light mode)
+    static var textSecondary: Color { Color.secondary }
     /// Light text color for overlays
     static var textLight: Color { .white.opacity(0.8) }
     
@@ -41,8 +41,8 @@ public extension Color {
 public extension ShapeStyle where Self == Color {
     
     // MARK: - Icon Colors
-    /// Primary icon color (black)
-    static var iconPrimary: Color { .black }
+    /// Primary icon color (adaptive for dark/light mode)
+    static var iconPrimary: Color { Color.primary }
     
     // MARK: - Feedback Colors
     /// Success color for positive feedback
@@ -51,10 +51,10 @@ public extension ShapeStyle where Self == Color {
     static var feedbackError: Color { .red }
     
     // MARK: - Text Colors
-    /// Primary text color
-    static var textPrimary: Color { .black }
-    /// Secondary text color
-    static var textSecondary: Color { .gray }
+    /// Primary text color (adaptive for dark/light mode)
+    static var textPrimary: Color { Color.primary }
+    /// Secondary text color (adaptive for dark/light mode)
+    static var textSecondary: Color { Color.secondary }
     /// Light text color for overlays
     static var textLight: Color { .white.opacity(0.8) }
     

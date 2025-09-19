@@ -4,7 +4,6 @@
 //
 //  Created by Celio Junior on 09/09/25.
 //
-
 import SwiftUI
 import Vision
 import CoreML
@@ -20,7 +19,8 @@ import CoreML
     @Published private(set) var detectionHistory: [ObjectResult] = []
 
     private(set) var model: Resnet50? = nil
-    
+    private var visionModel: VNCoreMLModel? = nil
+
     // MARK: Enums
 
     enum SetupStatus: CaseIterable {
@@ -38,28 +38,52 @@ extension ObjectDetector {
         await setupModels()
     }
     
-//    func start() async {
-//        do {
-//            try await setupModel()
-//        } catch {
-//            print(error.localizedDescription)
-//            setupStatus = .failed
-//            return
-//        }
-//    }
-
     nonisolated func onImageReceived(buffer imageBuffer: CVImageBuffer) {
-        Task {
+        
+        Task.detached { [weak self] in
+            guard let self = self else { return }
+            
+            let result = await self.processImage(buffer: imageBuffer)
+            
             await MainActor.run {
-                if let result = try? getObjectResult(buffer: imageBuffer) {
-                    currentResult = result
-                    detectionHistory.append(result)
-                    
-                    if detectionHistory.count > 100 {
-                        detectionHistory.removeFirst()
-                    }
+                guard let result = result else { return }
+                self.currentResult = result
+                self.detectionHistory.append(result)
+                
+                if self.detectionHistory.count > 100 {
+                    self.detectionHistory.removeFirst()
                 }
             }
+        }
+    }
+    
+    nonisolated func processImage(buffer imageBuffer: CVImageBuffer) async -> ObjectResult? {
+        guard await setupStatus == .success else { return nil }
+        guard let visionModel = await visionModel else { return nil }
+        
+        do {
+            let request = VNCoreMLRequest(model: visionModel)
+            request.imageCropAndScaleOption = .centerCrop
+            
+            let handler = VNImageRequestHandler(cvPixelBuffer: imageBuffer, options: [:])
+            try handler.perform([request])
+            
+            guard let results = request.results as? [VNClassificationObservation],
+                  let topResult = results.first else { return nil }
+            
+            let classLabelProbs = results.reduce(into: [String: Double]()) { dict, observation in
+                dict[observation.identifier] = Double(observation.confidence)
+            }
+            
+            let resnetOutput = Resnet50Output(
+                classLabelProbs: classLabelProbs,
+                classLabel: topResult.identifier
+            )
+            
+            return ObjectResult(output: resnetOutput)
+        } catch {
+            print("Error processing image: \(error)")
+            return nil
         }
     }
 }
@@ -97,6 +121,10 @@ private extension ObjectDetector {
             }.value
 
             self.model = model
+            
+            // Prepara o VNCoreMLModel para uso posterior
+            self.visionModel = try? VNCoreMLModel(for: model.model)
+            
         } catch {
             print(error.localizedDescription)
             setupStatus = .failed
@@ -104,32 +132,5 @@ private extension ObjectDetector {
         }
 
         setupStatus = .success
-    }
-
-    func getObjectResult(buffer imageBuffer: CVImageBuffer) throws -> ObjectResult? {
-        guard setupStatus == .success else { return nil }
-        guard let model = model else { return nil }
-
-        let visionModel = try VNCoreMLModel(for: model.model)
-        let request = VNCoreMLRequest(model: visionModel)
-        
-        request.imageCropAndScaleOption = .centerCrop
-        
-        let handler = VNImageRequestHandler(cvPixelBuffer: imageBuffer, options: [:])
-        try handler.perform([request])
-        
-        guard let results = request.results as? [VNClassificationObservation],
-              let topResult = results.first else { return nil }
-        
-        let classLabelProbs = results.reduce(into: [String: Double]()) { dict, observation in
-            dict[observation.identifier] = Double(observation.confidence)
-        }
-        
-        let resnetOutput = Resnet50Output(
-            classLabelProbs: classLabelProbs,
-            classLabel: topResult.identifier
-        )
-        
-        return ObjectResult(output: resnetOutput)
     }
 }
